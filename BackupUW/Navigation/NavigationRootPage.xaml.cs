@@ -1,17 +1,11 @@
-﻿using System;
+﻿using BackupUW.Views;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Diagnostics;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -20,7 +14,7 @@ using Windows.UI.Xaml.Navigation;
 namespace BackupUW.Navigation
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// An page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class NavigationRootPage : Page
     {
@@ -33,11 +27,6 @@ namespace BackupUW.Navigation
         public NavigationView NavigationView
         {
             get { return NavView; }
-        }
-
-        public TextBlock AppTitle
-        {
-            get { return this.appTitle; }
         }
 
         public NavigationRootPage()
@@ -115,22 +104,15 @@ namespace BackupUW.Navigation
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
+            // find NavigationViewItem with Content that equals InvokedItem
+            //var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
+            //DoNavigate(item as NavigationViewItem);
 
-            //if (args.IsSettingsInvoked)
-            //{
-            //    rootFrame.Navigate(typeof(SettingsPage));
-            //}
-            //else
-            {
-                // find NavigationViewItem with Content that equals InvokedItem
-                var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
-                NavView_Navigate(item as NavigationViewItem);
-
-            }
         }
 
         private void OnRootFrameNavigated(object sender, NavigationEventArgs e)
         {
+            Debug.WriteLine("OnRootFrameNavigated");
         }
 
         private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -142,11 +124,11 @@ namespace BackupUW.Navigation
             //else
             {
                 NavigationViewItem item = args.SelectedItem as NavigationViewItem;
-                NavView_Navigate(item);
+                DoNavigate(item);
             }
         }
 
-        private void NavView_Navigate(NavigationViewItem item)
+        private void DoNavigate(NavigationViewItem item)
         {
             switch (item.Tag)
             {
@@ -154,47 +136,13 @@ namespace BackupUW.Navigation
                     rootFrame.Navigate(typeof(MainPage));
                     break;
 
-                case "main":
-                    rootFrame.Navigate(typeof(MainPage));
+                case "sources":
+                    rootFrame.Navigate(typeof(SourcesPage));
                     break;
 
-                case "item1":
-                    //rootFrame.Navigate(typeof(ItemPage));
-                    break;
             }
         }
 
-        private void NavView_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
-        {
-            EnsureAppTitle();
-        }
-
-        private void NavView_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            EnsureAppTitle();
-        }
-
-        private void NavView_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            EnsureAppTitle();
-        }
-
-        public bool Extend { get; set; }
-
-        public void EnsureAppTitle()
-        {
-            if (Extend)
-            {
-                if (this.NavView.IsPaneOpen)
-                    this.appTitle.Visibility = Visibility.Visible;
-                else
-                    this.appTitle.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                this.appTitle.Visibility = Visibility.Collapsed;
-            }
-        }
     }
 }
 

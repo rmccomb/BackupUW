@@ -11,4 +11,11 @@
 
     <x:String x:Key="AppName">tiz.digital Backup</x:String>
 
+    <Style x:Key="SampleHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
+        <Setter Property="FontSize" Value="28"/>
+    </Style>
+
+    <Style x:Key="ScenarioDescriptionTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+    </Style>
+
 </ResourceDictionary>

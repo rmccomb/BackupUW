@@ -93,7 +93,7 @@ namespace BackupUW.Navigation
             }
 
             // Path to json file
-            Uri dataUri = new Uri("ms-appx:///DataModel/NavigationInfoItems.json");
+            Uri dataUri = new Uri("ms-appx:///Navigation/NavigationInfoItems.json");
 
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
             string jsonText = await FileIO.ReadTextAsync(file);

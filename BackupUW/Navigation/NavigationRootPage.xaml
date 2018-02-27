@@ -9,23 +9,12 @@
 
     <Grid Background="{ThemeResource SystemControlAcrylicWindowBrush}">
 
-        <TextBlock x:Name="appTitle" 
-            xmlns:appmodel="using:Windows.ApplicationModel"
-            Text="{StaticResource AppName}" 
-            Style="{StaticResource CaptionTextBlockStyle}" 
-            IsHitTestVisible="False" 
-            Canvas.ZIndex="1" />
-
         <NavigationView x:Name="NavView"
                         ItemInvoked="NavView_ItemInvoked"
                         SelectionChanged="NavView_SelectionChanged"
                         Loaded="NavView_Loaded"
                         Canvas.ZIndex="0" 
-                        DisplayModeChanged="NavView_DisplayModeChanged" 
-                        SizeChanged="NavView_SizeChanged"
-                        Tapped="NavView_Tapped"
-                        OpenPaneLength="200"
-                        >
+                        OpenPaneLength="200">
 
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Uid="HomeNavItem" Content="Home" Tag="home">

@@ -47,51 +47,24 @@ namespace BackupUW
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            //Frame rootFrame = Window.Current.Content as Frame;
+            EnsureWindowAsync(e);
 
-            //// Do not repeat app initialization when the Window already has content,
-            //// just ensure that the window is active
-            //if (rootFrame == null)
-            //{
-            //    // Create a Frame to act as the navigation context and navigate to the first page
-            //    rootFrame = new Frame();
-
-            //    rootFrame.NavigationFailed += OnNavigationFailed;
-
-            //    if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-            //    {
-            //        //TODO: Load state from previously suspended application
-            //    }
-
-            //    // Place the frame in the current Window
-            //    Window.Current.Content = rootFrame;
-            //}
-
-            //if (e.PrelaunchActivated == false)
-            //{
-            //    if (rootFrame.Content == null)
-            //    {
-            //        // When the navigation stack isn't restored navigate to the first page,
-            //        // configuring the new page by passing required information as a navigation
-            //        // parameter
-            //        rootFrame.Navigate(typeof(MainPage), e.Arguments);
-            //    }
-            //    // Ensure the current window is active
-            //    Window.Current.Activate();
-            //}
-
-            EnsureWindow(e);
-
+            Debug.WriteLine(e.Arguments);
             // Handle JumpList
-            if (e.Kind == ActivationKind.Launch && e.Arguments == "/jumplist:test-params")
+            if (e.Kind == ActivationKind.Launch && e.Arguments == "/jumplist:discover")
             {
-                // Run code relevant to the task that was selected.
-                Debug.WriteLine(e.Arguments);
+                // TODO Call Discover Files
+            }
+            if (e.Kind == ActivationKind.Launch && e.Arguments == "/jumplist:backup")
+            {
+                // TODO Invoke Backup
             }
         }
 
-        private void EnsureWindow(IActivatedEventArgs args)
+        private async void EnsureWindowAsync(IActivatedEventArgs args)
         {
+            await NavigationInfoDataSource.Instance.GetItemsAsync();
+
             Frame rootFrame = GetRootFrame();
 
             Type targetPageType = typeof(MainPage);
@@ -137,9 +110,6 @@ namespace BackupUW
             else
             {
                 rootFrame = (Frame)rootPage.FindName("rootFrame");
-
-                //rootPage.Extend = this.Extend;
-                rootPage.EnsureAppTitle();
             }
 
             return rootFrame;
@@ -172,13 +142,18 @@ namespace BackupUW
         async void PopulateJumpListAsync()
         {
             var jumpList = await JumpList.LoadCurrentAsync();
+            jumpList.Items.Clear();
 
-            var item = JumpListItem.CreateWithArguments("/jumplist:test-params", "Do Something");
-            item.Description = "Description text";
+            var discover = JumpListItem.CreateWithArguments("/jumplist:discover", "Discover Files");
+            discover.Description = "Find changed files to backup";
             //item.GroupName = GroupName.Text;
             //item.Logo = new Uri("ms-appx:///Assets/smalltile-sdk.png");
-            jumpList.Items.Clear();
-            jumpList.Items.Add(item);
+            jumpList.Items.Add(discover);
+
+            var backup = JumpListItem.CreateWithArguments("/jumplist:backup", "Backup");
+            backup.Description = "Invoke the backup process";
+            jumpList.Items.Add(backup);
+
             await jumpList.SaveAsync();
         }
     }

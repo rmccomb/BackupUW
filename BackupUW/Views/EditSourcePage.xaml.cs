@@ -21,9 +21,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace BackupUW.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class EditSourcePage : Page
     {
         public EditSourcePage()
@@ -49,14 +46,14 @@ namespace BackupUW.Views
             base.OnNavigatedTo(e);
         }
 
-        private void PickDirectory_Click(object sender, RoutedEventArgs e)
+        private async void PickDirectory_ClickAsync(object sender, RoutedEventArgs e)
         {
             FolderPicker folderPicker = new FolderPicker();
             folderPicker.SuggestedStartLocation = PickerLocationId.Desktop;
             folderPicker.FileTypeFilter.Add(".docx");
             folderPicker.FileTypeFilter.Add(".xlsx");
             folderPicker.FileTypeFilter.Add(".pptx");
-            StorageFolder folder = folderPicker.PickSingleFolderAsync().GetResults();
+            StorageFolder folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
             {
                 // Application now has read/write access to all contents in the picked folder (including other sub-folder contents)
