@@ -22,6 +22,8 @@ namespace BackupUW
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public string Message => "Main page";
+
         public MainPage()
         {
             this.InitializeComponent();
