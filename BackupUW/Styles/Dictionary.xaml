@@ -18,4 +18,8 @@
     <Style x:Key="ScenarioDescriptionTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
     </Style>
 
+    <Style x:Key="MessageTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
+        <Setter Property="Foreground" Value="Blue"/>
+    </Style>
+
 </ResourceDictionary>

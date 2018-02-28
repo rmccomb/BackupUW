@@ -20,13 +20,35 @@
         </StackPanel>
         <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
             <StackPanel>
-                <TextBlock TextWrapping="WrapWholeWords">
-                    Fill out the form below
-                </TextBlock>
+                <TextBlock TextWrapping="WrapWholeWords" Margin="0,10,10,10">Select a directory</TextBlock>
 
                 <TextBox x:Name="Directory" PlaceholderText="Directory"></TextBox>
-                <Button x:Name="PickDirectory" Click="PickDirectory_ClickAsync" Margin="10">Select</Button>
+                <Button x:Name="PickDirectory" Click="PickDirectory_ClickAsync" Margin="0,10" Width="120">Select</Button>
+
+                <TextBlock TextWrapping="WrapWholeWords" Margin="0,10,0,0">Pattern</TextBlock>
+                <TextBox x:Name="Pattern" PlaceholderText="*.*" Width="116" HorizontalAlignment="Left" Margin="0,10, 10, 10"></TextBox>
+
+                <!--<TextBlock TextWrapping="WrapWholeWords"></TextBlock>-->
+                <CheckBox x:Name="ModifiedOnly" Margin="10">Modified Only</CheckBox>
+
+                <Button x:Name="Save" Margin="0,10" Width="120" Click="Save_Click">Save</Button>
+
+                <TextBlock x:Name="Message" Margin="10" Style="{StaticResource MessageTextBlockStyle}"></TextBlock>
                 
+                <!--<Button x:Name="DisplayConfirmation" HorizontalAlignment="Left" Click="DisplayConfirmation_Click" Width="150" Margin="20,10,0,0">
+                    <StackPanel>
+                        <TextBlock>Display Your Popup Text</TextBlock>
+                        <Popup Name="ConfirmDeletePopup" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Name="myPopupText" Foreground="Blue">
+                                    Confirm?
+                                </TextBlock>
+                                <Button x:Name="ConfirmDelete" Click="ConfirmDelete_Click">Delete</Button>
+                                <Button x:Name="Cancel" Click="Cancel_Click">Cancel</Button>
+                            </StackPanel>
+                        </Popup>
+                    </StackPanel>
+                </Button>-->
             </StackPanel>
         </ScrollViewer>
         

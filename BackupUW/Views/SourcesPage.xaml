@@ -5,8 +5,36 @@
     xmlns:local="using:BackupUW.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    xmlns:model="using:BackupUW.Model">
+    
+    <Page.Resources>
+        <ResourceDictionary>
+            <!--<CollectionViewSource x:Name="SourcesCollectionViewSource" Source="{x:Bind SourcesCollection}"/>-->
 
+            <DataTemplate x:Key="SourceHeaderTemplate">
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="Directory" FontWeight="Bold" />
+                    <TextBlock Text="Pattern" FontWeight="Bold"/>
+                    <TextBlock Text="ModifiedOnly" FontWeight="Bold"/>
+                </StackPanel>
+            </DataTemplate>
+            <!--<DataTemplate  x:Key="SourceItemTemplate" x:DataType="model:ThingWithName">
+                <Grid>
+                    <TextBlock Text="{x:Bind Name}"/>
+                </Grid>
+            </DataTemplate>-->
+            <DataTemplate x:Key="SourceItemTemplate" x:DataType="model:SourceViewModel">
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="{x:Bind Directory}" />
+                    <TextBlock Text="{x:Bind Pattern}" />
+                    <TextBlock Text="{x:Bind ModifiedOnly}" />
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+
+    </Page.Resources>
+    
     <Grid Background="{ThemeResource SystemControlAcrylicWindowBrush}" Padding="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -15,18 +43,38 @@
         <StackPanel Margin="0,0,0,10">
             <TextBlock Text="Source Directories" Style="{StaticResource SampleHeaderTextStyle}"/>
             <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="WrapWholeWords">
-                    Edit the list of directories to backup
+                    Define the list of directories to backup
             </TextBlock>
         </StackPanel>
         <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
             <StackPanel>
+                <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
 
-                <ListView x:Name="SourcesListView" 
-                          Header="List of sources" 
-                          IsItemClickEnabled="True" >
-                    
-                </ListView>
+                    <!--<TextBlock Text="{x:Bind TheBoundMessage}" />-->
 
+                    <!--<ListView ItemsSource="{x:Bind Model.Employees}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:IEmployee">
+                                <Grid>
+                                    <TextBlock Text="{x:Bind Name}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>-->
+                    <!--<ListView ItemsSource="{x:Bind MyListOfNames}" 
+                              HeaderTemplate="{StaticResource SourceHeaderTemplate}"
+                              ItemTemplate="{StaticResource SourceItemTemplate}">
+                    </ListView>-->
+                    <ListView ItemsSource="{x:Bind SourceCollection.Sources}" 
+                              HeaderTemplate="{StaticResource SourceHeaderTemplate}"
+                              ItemTemplate="{StaticResource SourceItemTemplate}">
+                    </ListView>
+                </ScrollViewer>
+                
+                <!--<StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
+                    <Button Click="UpdateValuesClick" >Update Values</Button>
+                    <Button Click="ResetValuesClick" >Reset Values</Button>
+                </StackPanel>-->
                 <StackPanel Orientation="Horizontal" >
                     <Button x:Name="AddDirectory" Click="Add_Click" Margin="10">Add</Button>
                     <Button x:Name="EditDirectory" Click="Edit_Click" Margin="10">Edit</Button>

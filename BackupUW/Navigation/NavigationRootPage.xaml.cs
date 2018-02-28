@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
@@ -104,28 +105,29 @@ namespace BackupUW.Navigation
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
+            Debug.WriteLine("NavView_ItemInvoked");
             // find NavigationViewItem with Content that equals InvokedItem
-            //var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
-            //DoNavigate(item as NavigationViewItem);
-
+            var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
+            DoNavigate(item as NavigationViewItem);
         }
 
         private void OnRootFrameNavigated(object sender, NavigationEventArgs e)
         {
-            Debug.WriteLine("OnRootFrameNavigated");
+            //Debug.WriteLine("OnRootFrameNavigated");
         }
 
         private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            Debug.WriteLine("NavView_SelectionChanged");
             //if (args.IsSettingsSelected)
             //{
             //    rootFrame.Navigate(typeof(SettingsPage));
             //}
             //else
-            {
-                NavigationViewItem item = args.SelectedItem as NavigationViewItem;
-                DoNavigate(item);
-            }
+            //{
+            //    NavigationViewItem item = args.SelectedItem as NavigationViewItem;
+            //    DoNavigate(item);
+            //}
         }
 
         private void DoNavigate(NavigationViewItem item)
