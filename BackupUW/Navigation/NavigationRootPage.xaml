@@ -30,7 +30,7 @@
 
             <NavigationView.HeaderTemplate>
                 <DataTemplate>
-                    <Grid Margin="18,0,0,0">
+                    <Grid Margin="20,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
@@ -48,7 +48,7 @@
                 <TextBlock >Footer</TextBlock>
             </NavigationView.PaneFooter>-->
 
-            <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" Margin="24" >
+            <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" Margin="12" >
                 <Frame.ContentTransitions>
                     <TransitionCollection>
                         <NavigationThemeTransition/>

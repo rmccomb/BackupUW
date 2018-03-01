@@ -35,9 +35,17 @@ namespace BackupUW
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
-            PopulateJumpListAsync();
+            try
+            {
+                this.InitializeComponent();
+                this.Suspending += OnSuspending;
+                PopulateJumpListAsync();
+                Model.SourcesDataSource.Instance.GetItems();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -144,15 +152,19 @@ namespace BackupUW
             var jumpList = await JumpList.LoadCurrentAsync();
             jumpList.Items.Clear();
 
-            var discover = JumpListItem.CreateWithArguments("/jumplist:discover", "Discover Files");
-            discover.Description = "Find changed files to backup";
-            //item.GroupName = GroupName.Text;
-            //item.Logo = new Uri("ms-appx:///Assets/smalltile-sdk.png");
-            jumpList.Items.Add(discover);
-
-            var backup = JumpListItem.CreateWithArguments("/jumplist:backup", "Backup");
-            backup.Description = "Invoke the backup process";
-            jumpList.Items.Add(backup);
+            {
+                var discover = JumpListItem.CreateWithArguments("/jumplist:discover", "Discover Files");
+                discover.Description = "Find changed files to backup";
+                //item.GroupName = GroupName.Text;
+                discover.Logo = new Uri("ms-appx:///Resources/Collection_16x.png");
+                jumpList.Items.Add(discover);
+            }
+            {
+                var backup = JumpListItem.CreateWithArguments("/jumplist:backup", "Backup");
+                backup.Description = "Invoke the backup process";
+                backup.Logo = new Uri("ms-appx:///Resources/Cloud_48x.png");
+                jumpList.Items.Add(backup);
+            }
 
             await jumpList.SaveAsync();
         }

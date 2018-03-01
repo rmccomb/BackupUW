@@ -51,19 +51,11 @@ namespace BackupUW.Navigation
 
         #region Singleton
 
-        private static NavigationInfoDataSource _instance;
-
-        public static NavigationInfoDataSource Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        public static NavigationInfoDataSource Instance; 
 
         static NavigationInfoDataSource()
         {
-            _instance = new NavigationInfoDataSource();
+            Instance = new NavigationInfoDataSource();
         }
 
         private NavigationInfoDataSource() { }
@@ -71,15 +63,12 @@ namespace BackupUW.Navigation
         #endregion
 
         private IList<NavigationInfo> _items = new List<NavigationInfo>();
-        public IList<NavigationInfo> Items
-        {
-            get { return this._items; }
-        }
+        public IList<NavigationInfo> Items => this._items; 
 
         public async Task<IEnumerable<NavigationInfo>> GetItemsAsync()
         {
-            await _instance.GetNavigationInfoDataAsync();
-            return _instance.Items;
+            await Instance.GetNavigationInfoDataAsync();
+            return Instance.Items;
         }
 
         private async Task GetNavigationInfoDataAsync()
