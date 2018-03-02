@@ -49,7 +49,6 @@ namespace BackupUW.Views
         {
             Debug.WriteLine("SourcesPage.OnNavigatedTo");
             base.OnNavigatedTo(e);
-            CheckSourcePermission();
 
             //this.DataContext = this; // CHECK NEEDED?
         }
@@ -59,6 +58,7 @@ namespace BackupUW.Views
             StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
             Debug.WriteLine(appFolder.Path);
 
+            var failedAccess = new List<string>();
             foreach (var source in SourceCollection)
             {
                 try
@@ -68,7 +68,16 @@ namespace BackupUW.Views
                 catch (Exception ex)
                 {
                     Debug.WriteLine($"{ex.Message} {source.Directory}");
+                    failedAccess.Add(source.Directory);
                 }
+            }
+
+            if (failedAccess.Count > 0)
+            {
+                var dlg = new MessageDialog("No Access Error");
+                dlg.MessageText = string.Join("\n", failedAccess.ToArray());
+                dlg.IsSecondaryButtonEnabled = false;
+                var result = await dlg.ShowAsync();
             }
         }
 
@@ -118,5 +127,7 @@ namespace BackupUW.Views
                 RemoveSource.IsEnabled = false;
             }
         }
+
+        private void CheckAccess_Click(object sender, RoutedEventArgs e) => CheckSourcePermission();
     }
 }

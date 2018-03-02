@@ -106,9 +106,16 @@ namespace BackupUW.Navigation
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             Debug.WriteLine("NavView_ItemInvoked");
-            // find NavigationViewItem with Content that equals InvokedItem
-            var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
-            DoNavigate(item as NavigationViewItem);
+            if (args.IsSettingsInvoked)
+            {
+                //rootFrame.Navigate(typeof(SettingsPage));
+            }
+            else
+            {
+                // find NavigationViewItem with Content that equals InvokedItem
+                var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
+                DoNavigate(item as NavigationViewItem);
+            }
         }
 
         private void OnRootFrameNavigated(object sender, NavigationEventArgs e)
@@ -140,6 +147,10 @@ namespace BackupUW.Navigation
 
                 case "sources":
                     rootFrame.Navigate(typeof(SourcesPage));
+                    break;
+
+                case "fileSystem":
+                    rootFrame.Navigate(typeof(FileSystemPage));
                     break;
 
             }

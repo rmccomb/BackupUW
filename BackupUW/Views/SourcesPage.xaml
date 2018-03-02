@@ -9,7 +9,8 @@
     xmlns:logic="using:Backup.Logic">
     
     <Page.Resources>
-        <ResourceDictionary>
+ 
+    <!--<ResourceDictionary>-->
             <!--<CollectionViewSource x:Name="SourcesCollectionViewSource" Source="{x:Bind SourcesCollection}"/>-->
 
 
@@ -26,7 +27,7 @@
                     <TextBlock Text="{x:Bind LastBackup}" Width="100" />
                 </StackPanel>
             </DataTemplate>-->
-        </ResourceDictionary>
+        <!--</ResourceDictionary>-->
 
     </Page.Resources>
     
@@ -66,8 +67,8 @@
                         <ListView.HeaderTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="6">
-                                    <TextBlock Text="Directory" FontWeight="Bold" Width="400"/>
-                                    <TextBlock Text="Pattern" FontWeight="Bold" Width="80"/>
+                                    <TextBlock Text="Directory" FontWeight="Bold" Width="400" />
+                                    <TextBlock Text="Pattern" FontWeight="Bold" Width="75" Margin="20,0,0,0"/>
                                     <TextBlock Text="Modified Only" FontWeight="Bold" Width="120"/>
                                     <TextBlock Text="Last Backup" FontWeight="Bold" Width="100" />
                                 </StackPanel>
@@ -77,7 +78,7 @@
                             <DataTemplate x:DataType="logic:Source">
                                 <StackPanel Orientation="Horizontal" Margin="6">
                                     <TextBlock Text="{x:Bind Directory}" Width="400" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text="{x:Bind Pattern}" Width="80"/>
+                                    <TextBlock Text="{x:Bind Pattern}" Width="75" Margin="20,0,0,0"/>
                                     <TextBlock Text="{x:Bind ModifiedOnly}" Width="120"/>
                                     <TextBlock Text="{x:Bind LastBackupText}" Width="100" />
                                 </StackPanel>
@@ -91,9 +92,10 @@
                     <Button Click="ResetValuesClick" >Reset Values</Button>
                 </StackPanel>-->
                 <StackPanel Orientation="Horizontal" >
-                    <Button x:Name="AddSource" Click="Add_Click" Margin="10">Add</Button>
-                    <Button x:Name="EditSource" Click="Edit_Click" Margin="10" IsEnabled="False">Edit</Button>
-                    <Button x:Name="RemoveSource" Click="Remove_Click" Margin="10" IsEnabled="False">Remove</Button>
+                    <Button x:Name="AddSource" Click="Add_Click" Margin="10" Width="90">Add</Button>
+                    <Button x:Name="EditSource" Click="Edit_Click" Margin="10" IsEnabled="False" Width="90">Edit</Button>
+                    <Button x:Name="RemoveSource" Click="Remove_Click" Margin="10" IsEnabled="False" Width="90">Remove</Button>
+                    <Button x:Name="CheckAccess" Style="{StaticResource LightPinkButton}" Click="CheckAccess_Click" Margin="10" IsEnabled="True">Check Access to Folders</Button>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

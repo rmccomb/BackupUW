@@ -108,6 +108,9 @@
     <Compile Include="Views\EditSourcePage.xaml.cs">
       <DependentUpon>EditSourcePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FileSystemPage.xaml.cs">
+      <DependentUpon>FileSystemPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
@@ -196,6 +199,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FileSystemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,8 +213,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Autofac">
+      <Version>4.6.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.6</Version>
+      <Version>6.0.7</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

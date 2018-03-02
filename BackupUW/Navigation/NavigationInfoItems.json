@@ -7,6 +7,14 @@
             "ImagePath": "\uE129",
             "Description": "A description",
             "Content": "Some content"
+        },
+        {
+            "UniqueId": "fileSystem",
+            "Title": "File System",
+            "Subtitle": "A subtitle",
+            "ImagePath": "\uE130",
+            "Description": "A description",
+            "Content": "Some content"
         }
     ]
 }

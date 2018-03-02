@@ -8,10 +8,11 @@ namespace Backup.Logic
 {
     public class Source
     {
-        public static string NeverText { get { return "Never"; } }
+        public static string NeverText => "Never";
         public string Directory { get; set; }
         public string Pattern { get; set; }
         public string ModifiedOnly { get; set; }
+        public bool IsModifiedOnly => ModifiedOnly == "Yes";
         public DateTime LastBackup { get; set; }
         public string LastBackupText => LastBackup == DateTime.MinValue ? NeverText : LastBackup.ToString();
         public Source(string path, string pattern, string modifiedOnly, DateTime? lastBackup = null)

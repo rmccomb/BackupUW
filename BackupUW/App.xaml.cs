@@ -1,4 +1,5 @@
-﻿using BackupUW.Navigation;
+﻿using Autofac;
+using BackupUW.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,12 +42,25 @@ namespace BackupUW
                 this.Suspending += OnSuspending;
                 PopulateJumpListAsync();
                 Model.SourcesDataSource.Instance.GetItems();
+                RegisterDIObjects();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
         }
+
+        private void RegisterDIObjects()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterType<Backup.Logic.FileManager>().As<Backup.Logic.IFileManager>();
+            builder.RegisterType<Backup.Logic.SettingsManager>().As<Backup.Logic.ISettingsManager>();
+            var container = builder.Build();
+
+            DIScope = container.BeginLifetimeScope();
+        }
+
+        public static ILifetimeScope DIScope { get; set; }
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

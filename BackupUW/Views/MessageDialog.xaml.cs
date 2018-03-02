@@ -27,14 +27,19 @@ namespace BackupUW.Views
             this.DefaultButton = ContentDialogButton.Primary;
         }
 
+        public string MessageText
+        {
+            get { return this.Message.Text; }
+            set { this.Message.Text = value; }
+        }
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            Debug.WriteLine("Primary");
+            //Debug.WriteLine("Primary");
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            Debug.WriteLine("Secondary");
+            //Debug.WriteLine("Secondary");
         }
     }
 }
